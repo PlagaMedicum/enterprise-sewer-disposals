@@ -8,7 +8,9 @@
     "start": "next start"
   },
   "dependencies": {
+    "@zeit/next-css": "^1.0.1",
     "db-migrate": "^0.11.6",
+    "db-migrate-mysql": "^2.1.0",
     "mysql": "^2.17.1",
     "next": "9.1.5",
     "react": "16.12.0",

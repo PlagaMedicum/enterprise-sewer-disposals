@@ -1,10 +1,10 @@
 {
-    "dev": {
-        "host": "localhost:3306",
-        "user": "mysql",
-        "password": "mysql",
-        "database": "sewer_disposals",
-        "driver": "mysql",
-        "multipleStatements": true
-    }, "sql-file": true
+  "dev": {
+    "host": "localhost",
+    "user": "mysql",
+    "password": "mysql",
+    "database": "sewer_disposals",
+    "driver": "mysql",
+    "multipleStatements": true
+  }, "sql-file": true
 }

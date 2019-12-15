@@ -3,21 +3,17 @@ import Link from 'next/link'
 
 const data = [
   { id: 1 },
-  { id: 2 },
 ]
 
-const Drains = () => (
+const Discharges = () => (
   <div>
     <Nav />
     <table align="center">
       <tr>
-        <th>Drain ID</th>
-        <th>Substance</th>
-        <th>Concentration limit</th>
-        <th>Coeff. of nonconservativity</th>
+        <th>Enterprise ID</th>
+        <th>Enterprise name</th>
         <th>Discharge ID</th>
         <th>Discharge name</th>
-        <th>Background concentration</th>
         <th/>
       </tr>
       {data.map(({ id }) => (
@@ -26,12 +22,9 @@ const Drains = () => (
           <th></th>
           <th></th>
           <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
           <th>
             <Link>view</Link><br/>
-            <Link href={`edit/drain?id=${id}`}>edit</Link><br/>
+            <Link>edit</Link><br/>
             <Link>delete</Link><br/>
           </th>
         </tr>
@@ -55,4 +48,4 @@ const Drains = () => (
   </div>
 )
 
-export default Drains
+export default Discharges
