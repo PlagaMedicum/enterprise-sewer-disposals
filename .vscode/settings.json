@@ -1,0 +1,13 @@
+{
+    "sqltools.connections": [
+        {
+            "database": "sewer_disposals",
+            "dialect": "MySQL",
+            "name": "sewer",
+            "password": "mysql",
+            "port": 3306,
+            "server": "localhost",
+            "username": "mysql"
+        }
+    ]
+}
