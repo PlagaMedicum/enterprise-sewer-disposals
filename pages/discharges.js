@@ -8,6 +8,7 @@ const data = [
 const Discharges = () => (
   <div>
     <Nav />
+    <Link align="center" href="add/discharge">add discharge</Link>
     <table align="center">
       <tr>
         <th>Enterprise ID</th>
@@ -19,9 +20,9 @@ const Discharges = () => (
       {data.map(({ id }) => (
         <tr>
           <th>{id}</th>
-          <th></th>
-          <th></th>
-          <th></th>
+          <th>{}</th>
+          <th>{}</th>
+          <th>{}</th>
           <th>
             <Link>view</Link><br/>
             <Link>edit</Link><br/>
