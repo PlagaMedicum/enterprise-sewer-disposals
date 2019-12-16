@@ -8,7 +8,9 @@ const data = [
 const Discharges = () => (
   <div>
     <Nav />
-    <Link align="center" href="add/discharge">add discharge</Link>
+    <div align="center">
+      <Link align="center" href="add/discharge">add discharge</Link>
+    </div>
     <table align="center">
       <tr>
         <th>Enterprise ID</th>
@@ -24,8 +26,8 @@ const Discharges = () => (
           <th>{}</th>
           <th>{}</th>
           <th>
-            <Link>view</Link><br/>
-            <Link>edit</Link><br/>
+            <Link href={`/view/discharge?id=${id}`}>view</Link><br/>
+            <Link href={`/edit/discharge?id=${id}`}>edit</Link><br/>
             <Link>delete</Link><br/>
           </th>
         </tr>

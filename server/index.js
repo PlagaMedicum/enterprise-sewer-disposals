@@ -14,9 +14,9 @@ app
     const dischargeRoutes = require('./routes/discharge.js')
     const disposaleRoutes = require('./routes/disposal.js')
 
-    server.use('/enterprise', enterpriseRoutes)
-    server.use('/discharge', dischargeRoutes)
-    server.use('/disposal', disposaleRoutes)
+    server.use('/api/enterprise', enterpriseRoutes)
+    server.use('/api/discharge', dischargeRoutes)
+    server.use('/api/disposal', disposaleRoutes)
 
     server.get("*", (req, res) => {
       return handle(req, res)

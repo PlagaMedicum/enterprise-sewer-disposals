@@ -9,7 +9,9 @@ const data = [
 const Drains = () => (
   <div>
     <Nav />
-    <Link align="center" href="add/drain">add drain</Link>
+    <div align="center">
+      <Link align="center" href="add/drain">add drain</Link>
+    </div>
     <table align="center">
       <tr>
         <th>Drain ID</th>
@@ -31,8 +33,8 @@ const Drains = () => (
           <th>{}</th>
           <th>{}</th>
           <th>
-            <Link>view</Link><br/>
-            <Link href={`edit/drain?id=${id}`}>edit</Link><br/>
+            <Link href={`/view/drain?id=${id}`}>view</Link><br/>
+            <Link href={`/edit/drain?id=${id}`}>edit</Link><br/>
             <Link>delete</Link><br/>
           </th>
         </tr>
