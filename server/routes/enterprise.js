@@ -1,12 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-function routes(app){
-  app.get('/', function (req, res) {
-    res.send([{"id": 1}, {"id": 2}, {"id": 3}])
-  })
+router.get('/a', function (req, res) {
+  res.send("sassasa")
+})
 
-  return router
-}
 
-module.exports = routes
+module.exports = router

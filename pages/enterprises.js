@@ -3,41 +3,7 @@ import Nav from '../components/nav'
 import Link from 'next/link'
 import axios from 'axios'
 
-class Enterprises extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      host: "localhost:3000/api",
-      data: [
-        { id: 1, name: 'test', substance: 'H2O' },
-      ]
-    }
-  }
-
-  updateTable(){
-    axios.get(`${this.state.host}/enterprise`)
-      .then(resp => {
-        if (resp.data != null) {
-          this.setState({ data: resp })
-        }
-      })
-      .catch(err => console.log(err))
-  }
-
-  static async getInitialProps({ req }) {
-    let data
-    axios.get(`/api/enterprise`)
-      .then(resp => {
-        if (resp.data != null) {
-          data = resp
-        }
-      })
-      .catch(err => console.log(err))
-
-    return { data }
-  }
-
-  render() {
+const Enterprises = ({ data }) => {
     return(
       <div>
         <Nav />
@@ -52,7 +18,7 @@ class Enterprises extends React.Component {
             <th>Substance</th>
             <th />
           </tr>
-          {this.props.data.map(({ id, name, date, substance }) => (
+          {data/*.map(({ id, name, date, substance }) => (
             <tr>
               <th>{id}</th>
               <th>{name}</th>
@@ -65,7 +31,7 @@ class Enterprises extends React.Component {
                 <a onClick={() => this.updateTable()}>sas</a>
               </th>
             </tr>
-          ))}
+          ))*/}
         </table>
         <style jsx>{`
           table {
@@ -85,6 +51,18 @@ class Enterprises extends React.Component {
       </div>
     )
   }
-}
+
+Enterprises.getInitialProps = async ({ req }) => {
+    let data
+    axios.get(`localhost:3100/api/enterprise`)
+      .then(resp => {
+        if (resp.data != null) {
+          data = resp
+        }
+      })
+      .catch(err => console.log(err))
+
+    return { data: data }
+  }
 
 export default Enterprises
