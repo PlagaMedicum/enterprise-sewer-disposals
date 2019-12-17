@@ -1,5 +1,6 @@
 import Nav from '../components/nav'
 import Link from 'next/link'
+import axios from 'axios'
 
 const Discharges = ({ data }) => (
   <div>
@@ -8,26 +9,30 @@ const Discharges = ({ data }) => (
       <Link align="center" href="add/discharge">add discharge</Link>
     </div>
     <table align="center">
-      <tr>
-        <th>Enterprise ID</th>
-        <th>Enterprise name</th>
-        <th>Discharge ID</th>
-        <th>Discharge name</th>
-        <th/>
-      </tr>
-      {data.map(({ id }) => (
+      <thead>
         <tr>
-          <th>{id}</th>
-          <th>{}</th>
-          <th>{}</th>
-          <th>{}</th>
-          <th>
-            <Link href={`/view/discharge?id=${id}`}>view</Link><br/>
-            <Link href={`/edit/discharge?id=${id}`}>edit</Link><br/>
-            <Link>delete</Link><br/>
-          </th>
+          <th>Enterprise ID</th>
+          <th>Enterprise name</th>
+          <th>Discharge ID</th>
+          <th>Discharge name</th>
+          <th/>
         </tr>
-      ))}
+      </thead>
+      <tbody>
+        {data.map(({ id, name, d_id, d_name }) => (
+          <tr>
+            <th>{id}</th>
+            <th>{name}</th>
+            <th>{d_id}</th>
+            <th>{d_name}</th>
+            <th>
+              <Link href={`/view/discharge?id=${id}`}>view</Link><br/>
+              <Link href={`/edit/discharge?id=${id}`}>edit</Link><br/>
+              <Link>delete</Link><br/>
+            </th>
+          </tr>
+        ))}
+      </tbody>
     </table>
     <style jsx>{`
       table {
@@ -47,7 +52,7 @@ const Discharges = ({ data }) => (
   </div>
 )
 
-Enterprises.getInitialProps = async ({ req }) => {
+Discharges.getInitialProps = async ({ req }) => {
   let data = [ { id: 0 } ]
   await axios.get(`http://localhost:3100/discharge`)
     .then(resp => {

@@ -1,4 +1,3 @@
-import React from 'react'
 import Nav from '../components/nav'
 import Link from 'next/link'
 import axios from 'axios'
@@ -16,19 +15,18 @@ const Enterprises = ({ data }) => {
               <th>ID</th>
               <th>Name</th>
               <th>Date</th>
-              <th>Substance</th>
+              <th>Substance name</th>
               <th />
             </tr>
           </thead>
           <tbody>
-            {data.map(({ id, name, date, substance }) => (
+            {data.map(({ id, name, date, s_name }) => (
               <tr>
                 <th>{id}</th>
                 <th>{name}</th>
                 <th>{date}</th>
-                <th>{substance}</th>
+                <th>{s_name}</th>
                 <th>
-                  <Link href={`/view/enterprise?id=${id}`}>view</Link><br/>
                   <Link href={`/edit/enterprise?id=${id}`}>edit</Link><br/>
                   <Link>delete</Link><br/>
                   <a onClick={() => this.updateTable()}>sas</a>
