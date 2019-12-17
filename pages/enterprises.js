@@ -2,6 +2,14 @@ import Nav from '../components/nav'
 import Link from 'next/link'
 import axios from 'axios'
 
+const deleteEnterprise = (id) => {
+  axios.delete(`http://localhost:3100/enterprise/${id}`)
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => console.log(err))
+}
+
 const Enterprises = ({ data }) => {
     return(
       <div>
@@ -28,8 +36,7 @@ const Enterprises = ({ data }) => {
                 <th>{s_name}</th>
                 <th>
                   <Link href={`/edit/enterprise?id=${id}`}>edit</Link><br/>
-                  <Link>delete</Link><br/>
-                  <a onClick={() => this.updateTable()}>sas</a>
+                  <a onClick={() => deleteEnterprise(id)}>delete</a><br/>
                 </th>
               </tr>
             ))}
@@ -49,6 +56,11 @@ const Enterprises = ({ data }) => {
           tr:nth-child(odd) {
             background-color: #fff;
           }
+          a {
+            cursor:pointer;
+            color:blue;
+            text-decoration:underline;
+          }
         `}</style>
       </div>
     )
@@ -57,9 +69,9 @@ const Enterprises = ({ data }) => {
 Enterprises.getInitialProps = async ({ req }) => {
   let data = [ { id: 0 } ]
   await axios.get(`http://localhost:3100/enterprise`)
-    .then(resp => {
-      if (resp.data != null) {
-        data = resp.data
+    .then(res => {
+      if (res.data != null) {
+        data = res.data
       }
     })
     .catch(err => console.log(err))

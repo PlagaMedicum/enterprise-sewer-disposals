@@ -57,17 +57,17 @@ Discharge.getInitialProps = async ({ query }) => {
   let substances = [ { id: 0 } ]
 
   await axios.get(`http://localhost:3100/discharge/${id}`)
-    .then(resp => {
-      if (resp.data != null) {
-        data = resp.data
+    .then(res => {
+      if (res.data != null) {
+        data = res.data
       }
     })
     .catch(err => console.log(err))
 
    await axios.get(`http://localhost:3100/substance`)
-    .then(resp => {
-      if (resp.data != null) {
-        substances = resp.data
+    .then(res => {
+      if (res.data != null) {
+        substances = res.data
       }
     })
     .catch(err => console.log(err))

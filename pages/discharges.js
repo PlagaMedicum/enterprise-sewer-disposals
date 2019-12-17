@@ -2,6 +2,14 @@ import Nav from '../components/nav'
 import Link from 'next/link'
 import axios from 'axios'
 
+const deleteDischarge = (id) => {
+  axios.delete(`http://localhost:3100/discharge/${id}`)
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => console.log(err))
+}
+
 const Discharges = ({ data }) => (
   <div>
     <Nav />
@@ -28,7 +36,7 @@ const Discharges = ({ data }) => (
             <th>
               <Link href={`/view/discharge?id=${id}`}>view</Link><br/>
               <Link href={`/edit/discharge?id=${id}`}>edit</Link><br/>
-              <Link>delete</Link><br/>
+              <a onClick={() => deleteDischarge(id)}>delete</a><br/>
             </th>
           </tr>
         ))}
@@ -48,6 +56,11 @@ const Discharges = ({ data }) => (
       tr:nth-child(odd) {
         background-color: #fff;
       }
+      a {
+        cursor:pointer;
+        color:blue;
+        text-decoration:underline;
+      }
     `}</style>
   </div>
 )
@@ -55,9 +68,9 @@ const Discharges = ({ data }) => (
 Discharges.getInitialProps = async ({ req }) => {
   let data = [ { id: 0 } ]
   await axios.get(`http://localhost:3100/discharge`)
-    .then(resp => {
-      if (resp.data != null) {
-        data = resp.data
+    .then(res => {
+      if (res.data != null) {
+        data = res.data
       }
     })
     .catch(err => console.log(err))

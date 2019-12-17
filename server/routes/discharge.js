@@ -20,4 +20,33 @@ router.get('/:id', function (req, res) {
   })
 })
 
+router.post('/', function (req, res) {
+  if(!req.body) return res.sendStatus(400)
+
+  const name = req.body.name
+  conn.query("INSERT INTO discharges (name) VALUES (?)", [name], (err, data) => {
+    if(err) return console.error(err)
+    return res.sendStatus(201)
+  })
+})
+
+router.post('/:id', function (req, res) {
+  if(!req.body) return res.sendStatus(400)
+
+  const id = req.params.id
+  const name = req.body.name
+  conn.query("UPDATE discharges SET name=? WHERE id=?", [name, id], (err, data) => {
+    if(err) return console.error(err)
+    return res.sendStatus(201)
+  })
+})
+
+router.delete('/:id', function (req, res) {
+  const id = req.params.id
+  conn.query("DELETE FROM discharges WHERE id=?", [id], (err, data) => {
+    if(err) return console.error(err)
+    res.sendStatus(200)
+  })
+})
+
 module.exports = router

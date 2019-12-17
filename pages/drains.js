@@ -55,9 +55,9 @@ const Drains = ({ data }) => (
 Drains.getInitialProps = async ({ req }) => {
   let data = [ { id: 0 } ]
   await axios.get(`http://localhost:3100/drain`)
-    .then(resp => {
-      if (resp.data != null) {
-        data = resp.data
+    .then(res => {
+      if (res.data != null) {
+        data = res.data
       }
     })
     .catch(err => console.log(err))
