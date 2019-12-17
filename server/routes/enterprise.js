@@ -6,11 +6,13 @@ const config = require("../config.js")
 const conn = mysql.createConnection(config)
 
 router.get('/', function (req, res) {
+  const date = req.query.date
   conn.query(`SELECT e.id, e.name, bc.date, s.name AS s_name FROM enterprises e
                 INNER JOIN enterprises_discharges ed ON e.id = ed.e_id
                 INNER JOIN background_concentrations bc ON bc.d_id = ed.d_id
                 INNER JOIN substances s ON s.id = bc.s_id
-                GROUP BY e.id, bc.date, s.name`, (err, data) => {
+                WHERE bc.date = ?
+                GROUP BY e.id, bc.date, s.name`, [date], (err, data) => {
     if(err) return console.error(err)
     res.send(data)
   })
