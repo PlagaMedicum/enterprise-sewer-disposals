@@ -1,9 +1,15 @@
-const express = require("express");
-const router = express.Router();
+const express = require("express")
+const router = express.Router()
 
-router.get('/a', function (req, res) {
-  res.send("sassasa")
+const mysql  = require('mysql')
+const config = require("../config.js")
+const conn = mysql.createConnection(config)
+
+router.get('/', function (req, res) {
+  conn.query("SELECT * FROM enterprises", (err, data) => {
+    if(err) throw err
+    res.send(data)
+  })
 })
-
 
 module.exports = router

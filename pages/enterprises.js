@@ -11,27 +11,31 @@ const Enterprises = ({ data }) => {
           <Link href="add/enterprise">add enterprise</Link>
         </div>
         <table align="center">
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Date</th>
-            <th>Substance</th>
-            <th />
-          </tr>
-          {data/*.map(({ id, name, date, substance }) => (
+          <thead>
             <tr>
-              <th>{id}</th>
-              <th>{name}</th>
-              <th>{date}</th>
-              <th>{substance}</th>
-              <th>
-                <Link href={`/view/enterprise?id=${id}`}>view</Link><br/>
-                <Link href={`/edit/enterprise?id=${id}`}>edit</Link><br/>
-                <Link>delete</Link><br/>
-                <a onClick={() => this.updateTable()}>sas</a>
-              </th>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Date</th>
+              <th>Substance</th>
+              <th />
             </tr>
-          ))*/}
+          </thead>
+          <tbody>
+            {data.map(({ id, name, date, substance }) => (
+              <tr>
+                <th>{id}</th>
+                <th>{name}</th>
+                <th>{date}</th>
+                <th>{substance}</th>
+                <th>
+                  <Link href={`/view/enterprise?id=${id}`}>view</Link><br/>
+                  <Link href={`/edit/enterprise?id=${id}`}>edit</Link><br/>
+                  <Link>delete</Link><br/>
+                  <a onClick={() => this.updateTable()}>sas</a>
+                </th>
+              </tr>
+            ))}
+          </tbody>
         </table>
         <style jsx>{`
           table {
@@ -53,16 +57,16 @@ const Enterprises = ({ data }) => {
   }
 
 Enterprises.getInitialProps = async ({ req }) => {
-    let data
-    axios.get(`localhost:3100/api/enterprise`)
-      .then(resp => {
-        if (resp.data != null) {
-          data = resp
-        }
-      })
-      .catch(err => console.log(err))
-
-    return { data: data }
-  }
+  let data = [ { id: 0 } ]
+  await axios.get(`http://localhost:3100/enterprise`)
+    .then(resp => {
+      if (resp.data != null) {
+        data = resp.data
+      }
+    })
+    .catch(err => console.log(err))
+  
+  return { data: data }
+}
 
 export default Enterprises

@@ -1,11 +1,7 @@
 import Nav from '../components/nav'
 import Link from 'next/link'
 
-const data = [
-  { id: 1 },
-]
-
-const Discharges = () => (
+const Discharges = ({ data }) => (
   <div>
     <Nav />
     <div align="center">
@@ -50,5 +46,18 @@ const Discharges = () => (
     `}</style>
   </div>
 )
+
+Enterprises.getInitialProps = async ({ req }) => {
+  let data = [ { id: 0 } ]
+  await axios.get(`http://localhost:3100/discharge`)
+    .then(resp => {
+      if (resp.data != null) {
+        data = resp.data
+      }
+    })
+    .catch(err => console.log(err))
+  
+  return { data: data }
+}
 
 export default Discharges

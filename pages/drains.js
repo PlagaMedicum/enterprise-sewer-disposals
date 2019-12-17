@@ -1,12 +1,7 @@
 import Nav from '../components/nav'
 import Link from 'next/link'
 
-const data = [
-  { id: 1 },
-  { id: 2 },
-]
-
-const Drains = () => (
+const Drains = ({ data }) => (
   <div>
     <Nav />
     <div align="center">
@@ -57,5 +52,18 @@ const Drains = () => (
     `}</style>
   </div>
 )
+
+Enterprises.getInitialProps = async ({ req }) => {
+  let data = [ { id: 0 } ]
+  await axios.get(`http://localhost:3100/drain`)
+    .then(resp => {
+      if (resp.data != null) {
+        data = resp.data
+      }
+    })
+    .catch(err => console.log(err))
+  
+  return { data: data }
+}
 
 export default Drains
