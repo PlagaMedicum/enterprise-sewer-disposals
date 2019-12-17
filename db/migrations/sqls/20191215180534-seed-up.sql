@@ -53,8 +53,8 @@ insert into enterprises(name) values
 ('Enterprise3');
 insert into enterprises_discharges(e_id, d_id) values
 (1, 1),
-(1, 2),
-(2, 3);
+(2, 2),
+(3, 3);
 insert into discharges(name) values
 ('Discharge1'),
 ('Discharge2'),

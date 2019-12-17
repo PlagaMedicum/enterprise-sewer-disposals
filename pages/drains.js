@@ -5,31 +5,28 @@ import axios from 'axios'
 const Drains = ({ data }) => (
   <div>
     <Nav />
-    <div align="center">
-      <Link align="center" href="add/drain">add drain</Link>
-    </div>
     <table align="center">
       <thead>
         <tr>
           <th>Drain ID</th>
-          <th>Substance</th>
+          <th>Date</th>
+          <th>Substance name</th>
           <th>Concentration limit</th>
           <th>Coeff. of nonconservativity</th>
           <th>Discharge ID</th>
-          <th>Discharge name</th>
           <th>Background concentration</th>
         </tr>
       </thead>
       <tbody>
-        {data.map(({ id }) => (
+        {data.map(({ drain_id, date, s_name, c_l, coefficient, dis_id, b_c }) => (
           <tr>
-            <th>{id}</th>
-            <th>{}</th>
-            <th>{}</th>
-            <th>{}</th>
-            <th>{}</th>
-            <th>{}</th>
-            <th>{}</th>
+            <th>{drain_id}</th>
+            <th>{date}</th>
+            <th>{s_name}</th>
+            <th>{c_l}</th>
+            <th>{coefficient}</th>
+            <th>{dis_id}</th>
+            <th>{b_c}</th>
           </tr>
         ))}
       </tbody>

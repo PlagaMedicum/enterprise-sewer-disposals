@@ -6,7 +6,9 @@ const config = require("../config.js")
 const conn = mysql.createConnection(config)
 
 router.get('/', function (req, res) {
-  conn.query("SELECT * FROM discharges", (err, data) => {
+  conn.query(`SELECT e.id AS e_id, e.name AS e_name, d.id AS d_id, d.name AS d_name FROM discharges d
+                INNER JOIN enterprises_discharges ed ON ed.d_id = d.id
+                INNER JOIN enterprises e ON e.id = ed.e_id`, (err, data) => {
     if(err) throw err
     res.send(data)
   })
@@ -14,8 +16,11 @@ router.get('/', function (req, res) {
 
 router.get('/:id', function (req, res) {
   const id = req.params.id
-  conn.query("SELECT * FROM discharges WHERE id=?", [id], (err, data) => {
-    if(err) throw err
+  conn.query(`SELECT d.id, d.name, e.id AS e_id, e.name AS e_name FROM discharges d
+                INNER JOIN enterprises_discharges ed ON ed.d_id = d.id
+                INNER JOIN enterprises e ON e.id = ed.e_id
+                WHERE d.id=?`, [id], (err, data) => {
+    if(err) return console.error(err)
     res.send(data[0])
   })
 })

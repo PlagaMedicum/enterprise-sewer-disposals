@@ -6,8 +6,12 @@ const config = require("../config.js")
 const conn = mysql.createConnection(config)
 
 router.get('/', function (req, res) {
-  conn.query("SELECT * FROM enterprises", (err, data) => {
-    if(err) throw err
+  conn.query(`SELECT e.id, e.name, bc.date, s.name AS s_name FROM enterprises e
+                INNER JOIN enterprises_discharges ed ON e.id = ed.e_id
+                INNER JOIN background_concentrations bc ON bc.d_id = ed.d_id
+                INNER JOIN substances s ON s.id = bc.s_id
+                GROUP BY e.id, bc.date, s.name`, (err, data) => {
+    if(err) return console.error(err)
     res.send(data)
   })
 })
@@ -15,7 +19,7 @@ router.get('/', function (req, res) {
 router.get('/:id', function (req, res) {
   const id = req.params.id
   conn.query("SELECT * FROM enterprises WHERE id=?", [id], (err, data) => {
-    if(err) throw err
+    if(err) return console.error(err)
     res.send(data[0])
   })
 })

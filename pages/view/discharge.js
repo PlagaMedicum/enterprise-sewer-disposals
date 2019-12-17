@@ -8,6 +8,7 @@ const Discharge = ({ data, substances }) => {
       <div align="center">
         <b>ID: </b>{data.id}<br/>
         <b>Name: </b>{data.name}<br/>
+        <b>Enterprise ID: </b>{data.e_id}<br/>
         <b>Enterprise: </b>{data.e_name}<br/>
         <b>Substances:</b><br/>
       </div>
@@ -64,7 +65,7 @@ Discharge.getInitialProps = async ({ query }) => {
     })
     .catch(err => console.log(err))
 
-   await axios.get(`http://localhost:3100/substance`)
+   await axios.get(`http://localhost:3100/substance?id=${id}`)
     .then(res => {
       if (res.data != null) {
         substances = res.data

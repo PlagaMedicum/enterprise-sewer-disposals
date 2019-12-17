@@ -27,16 +27,16 @@ const Discharges = ({ data }) => (
         </tr>
       </thead>
       <tbody>
-        {data.map(({ id, name, d_id, d_name }) => (
+        {data.map(({ e_id, e_name, d_id, d_name }) => (
           <tr>
-            <th>{id}</th>
-            <th>{name}</th>
+            <th>{e_id}</th>
+            <th>{e_name}</th>
             <th>{d_id}</th>
             <th>{d_name}</th>
             <th>
-              <Link href={`/view/discharge?id=${id}`}>view</Link><br/>
-              <Link href={`/edit/discharge?id=${id}`}>edit</Link><br/>
-              <a onClick={() => deleteDischarge(id)}>delete</a><br/>
+              <Link href={`/view/discharge?id=${d_id}`}>view</Link><br/>
+              <Link href={`/edit/discharge?id=${d_id}`}>edit</Link><br/>
+              <a onClick={() => deleteDischarge(d_id)}>delete</a><br/>
             </th>
           </tr>
         ))}
